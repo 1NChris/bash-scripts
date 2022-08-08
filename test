@@ -1,0 +1,24 @@
+#!/bin/bash
+
+shell=/sbin/nologin
+if [ "$(id -u)" != 0 ]
+then
+  echo "idi naxyi, zovi admina" >&2
+  exit 1
+fi
+
+echo "hello, write user and then write group:"
+read -p "print user: " user
+read -p "print group: " group
+
+groupadd $group
+if [ "$group" = it ]
+then
+  if ! grep "$group" /etc/soduers
+    then 
+    echo '%'$group' ALL=(ALL) ALL' >> /etc/sudoers
+  fi  
+  shell=/bin/bash
+fi
+mkdir /home/$group
+useradd $user -g $group -b /home/$group -s $shell
