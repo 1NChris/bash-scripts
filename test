@@ -3,7 +3,7 @@
 shell=/sbin/nologin
 if [ "$(id -u)" != 0 ]
 then
-  echo "idi naxyi, zovi admina" >&2
+  echo "u are not an admin, get out" >&2
   exit 1
 fi
 
